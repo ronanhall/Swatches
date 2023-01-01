@@ -1,0 +1,108 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class colour_Change_UI : MonoBehaviour
+{
+    //[SerializeField] private colour_Change _colourChange;
+
+    public GameObject colourChangeUI;
+
+    [SerializeField] private GameObject _redColourChangeButton;
+    [SerializeField] private GameObject _greenColourChangeButton;
+    [SerializeField] private GameObject _yellowColourChangeButton;
+    [SerializeField] private GameObject _magentaColourChangeButton;
+    [SerializeField] private GameObject _blueColourChangeButton;
+
+    public bool canChangeRed;
+    public bool canChangeGreen;
+    public bool canChangeYellow;
+    public bool canChangeMagenta;
+    public bool canChangeBlue;
+
+    //[SerializeField] private GameObject _player;
+
+    [SerializeField] private bool _selectingColour;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (_selectingColour)
+            {
+                FinishedSelectingColour();
+            }
+            else
+            {
+                SelectingColour();
+            }
+
+        }
+
+        if (canChangeRed == true)
+        {
+            _redColourChangeButton.SetActive(true);
+        }
+        else
+        {
+            _redColourChangeButton.SetActive(false);
+        }
+
+        if (canChangeGreen == true)
+        {
+            _greenColourChangeButton.SetActive(true);
+        }
+        else
+        {
+            _greenColourChangeButton.SetActive(false);
+        }
+
+        if (canChangeYellow == true)
+        {
+            _yellowColourChangeButton.SetActive(true);
+        }
+        else
+        {
+            _yellowColourChangeButton.SetActive(false);
+        }
+
+        if (canChangeMagenta == true)
+        {
+            _magentaColourChangeButton.SetActive(true);
+        }
+        else
+        {
+            _magentaColourChangeButton.SetActive(false);
+        }
+
+        if (canChangeBlue == true)
+        {
+            _blueColourChangeButton.SetActive(true);
+        }
+        else
+        {
+            _blueColourChangeButton.SetActive(false);
+        }
+    }
+
+    public void SelectingColour()
+    {
+        colourChangeUI.SetActive(true);
+        Time.timeScale = 0f;
+        _selectingColour = true;
+    }
+
+    public void FinishedSelectingColour()
+    {
+        colourChangeUI.SetActive(false);
+        Time.timeScale = 1f;
+        _selectingColour = false;
+    }
+}
