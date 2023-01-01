@@ -1,0 +1,145 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class colour_Change : MonoBehaviour
+{
+    [SerializeField] private input_Controller input = null;
+
+    [SerializeField] private SpriteRenderer _playerColour;
+
+    [SerializeField] private GameObject _player;
+
+    [SerializeField] private GameObject _playerTwin;
+
+    [SerializeField] private wall_Interacter _wall;
+
+    private jump _jump;
+
+    private move _move;
+
+    [SerializeField] private GameObject _playerTwinSpawnPos;
+
+    [SerializeField] private float _baseMoveSpeed;
+    [SerializeField] private float _quickMoveSpeed;
+    [SerializeField] private float _baseAcceleration;
+    [SerializeField] private float _quickAcceleration;
+    [SerializeField] private float _baseJump;
+    [SerializeField] private float _highJump;
+
+    [SerializeField] private bool _spawnedClone;
+
+    private Vector2 _normalScale = new Vector2(1f, 1f);
+    private Vector2 _shrunkenScale = new Vector2(0.5f, 0.5f);
+
+    private void Awake()
+    {
+        _jump = GetComponent<jump>();
+
+        _move = GetComponent<move>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+      
+    }
+
+    public void ColourWhite()
+    {
+        _playerColour.color = Color.white;
+        _jump._jumpHeight = _baseJump;
+        _move._maxSpeed = _baseMoveSpeed;
+        _move._maxAcceleration = _baseAcceleration;
+        _player.transform.localScale = _normalScale;
+        _wall.canWallJump = false;
+        if (_spawnedClone == true)
+        {
+            Destroy(_playerTwin);
+            _spawnedClone = false;
+        }
+    }
+    
+
+    public void ColourRed()
+    {
+        _playerColour.color = Color.red;
+        _jump._jumpHeight = _highJump;
+        _move._maxSpeed = _baseMoveSpeed;
+        _move._maxAcceleration = _baseAcceleration;
+        _player.transform.localScale = _normalScale;
+        _wall.canWallJump = false;
+        if (_spawnedClone == true)
+        {
+            Destroy(_playerTwin);
+            _spawnedClone = false;
+        }
+    }
+    
+
+    public void ColourGreen()
+    {
+        _playerColour.color = Color.green;
+        _jump._jumpHeight = _baseJump;
+        _move._maxSpeed = _quickMoveSpeed;
+        _move._maxAcceleration = _quickAcceleration;
+        _player.transform.localScale = _normalScale;
+        _wall.canWallJump = false;
+        if (_spawnedClone == true)
+        {
+            Destroy(_playerTwin);
+            _spawnedClone = false;
+        }
+    }
+    
+
+    public void ColourYellow()
+    {
+        _playerColour.color = Color.yellow;
+        _jump._jumpHeight = _baseJump;
+        _move._maxSpeed = _baseMoveSpeed;
+        _move._maxAcceleration = _baseAcceleration;
+        _player.transform.localScale = _normalScale;
+        _wall.canWallJump = true;
+        if (_spawnedClone == true)
+        {
+            Destroy(_playerTwin);
+            _spawnedClone = false;
+        }
+    }
+
+    public void ColourBlue()
+    {
+        _playerColour.color = Color.blue;
+        _jump._jumpHeight = _baseJump;
+        _move._maxSpeed = _baseMoveSpeed;
+        _move._maxAcceleration = _baseAcceleration;
+        _player.transform.localScale = _normalScale;
+        _wall.canWallJump = false;
+        if (_spawnedClone == false)
+        {
+            float instX = _playerTwinSpawnPos.transform.position.x;
+            float instY = _playerTwinSpawnPos.transform.position.y;
+
+            _playerTwin = Instantiate(_player, new Vector2(instX, instY), Quaternion.identity);
+            _spawnedClone = true;
+        }
+    }
+
+    public void ColourMagenta()
+    {
+        _playerColour.color = Color.magenta;
+        _jump._jumpHeight = _baseJump;
+        _move._maxSpeed = _baseMoveSpeed;
+        _move._maxAcceleration = _baseAcceleration;
+        _player.transform.localScale = _shrunkenScale;
+        _wall.canWallJump = false;
+        if (_spawnedClone == true)
+        {
+            Destroy(_playerTwin);
+            _spawnedClone = false;
+        }
+    }
+
+    
+}
