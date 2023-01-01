@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ui_Instance : MonoBehaviour
+{
+    private static ui_Instance _instance;
+
+
+    public static ui_Instance instance
+    {
+        get
+        {
+            return _instance;
+        }
+        //returning a _instance
+    }
+
+    void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            if (_instance != this)
+                Destroy(gameObject);
+        }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
