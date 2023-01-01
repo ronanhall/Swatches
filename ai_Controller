@@ -20,34 +20,4 @@ public class ai_Controller : input_Controller
     {
         return 1f;
     }
-
-    public override bool retrieveColourWhite()
-    {
-        return false;
-    }
-
-    public override bool retrieveColourRed()
-    {
-        return false;
-    }
-
-    public override bool retrieveColourGreen()
-    {
-        return false;
-    }
-
-    public override bool retrieveColourYellow()
-    {
-        return false;
-    }
-
-    public override bool retrieveColourBlue()
-    {
-        return false;
-    }
-
-    public override bool retrieveColourMagenta()
-    {
-        return false;
-    }
 }
