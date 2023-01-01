@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class input_Controller : ScriptableObject
+{
+    public abstract float retrieveMoveInput();
+
+    public abstract bool retrieveJumpInput();
+
+    public abstract bool retrieveJumpHoldInput();
+
+    public abstract bool retrieveColourWhite();
+    public abstract bool retrieveColourRed();
+    public abstract bool retrieveColourGreen();
+    public abstract bool retrieveColourYellow();
+    public abstract bool retrieveColourBlue();
+    public abstract bool retrieveColourMagenta();
+
+
+}
