@@ -25,29 +25,4 @@ public class player_Controller : input_Controller
     {
         return Input.GetKeyDown(KeyCode.Alpha1);
     }
-
-    public override bool retrieveColourRed()
-    {
-        return Input.GetKeyDown(KeyCode.Alpha2);
-    }
-
-    public override bool retrieveColourGreen()
-    {
-        return Input.GetKeyDown(KeyCode.Alpha3);
-    }
-
-    public override bool retrieveColourYellow()
-    {
-        return Input.GetKeyDown(KeyCode.Alpha4);
-    }
-
-    public override bool retrieveColourBlue()
-    {
-        return Input.GetKeyDown(KeyCode.Alpha5);
-    }
-
-    public override bool retrieveColourMagenta()
-    {
-        return Input.GetKeyDown(KeyCode.Alpha6);
-    }
 }
