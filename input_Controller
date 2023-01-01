@@ -9,13 +9,4 @@ public abstract class input_Controller : ScriptableObject
     public abstract bool retrieveJumpInput();
 
     public abstract bool retrieveJumpHoldInput();
-
-    public abstract bool retrieveColourWhite();
-    public abstract bool retrieveColourRed();
-    public abstract bool retrieveColourGreen();
-    public abstract bool retrieveColourYellow();
-    public abstract bool retrieveColourBlue();
-    public abstract bool retrieveColourMagenta();
-
-
 }
