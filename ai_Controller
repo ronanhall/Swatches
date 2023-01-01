@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "AI Controller", menuName = "Input Controller/AI Controller")]
+
+public class ai_Controller : input_Controller
+{
+    public override bool retrieveJumpInput()
+    {
+        return true;
+    }
+
+    public override bool retrieveJumpHoldInput()
+    {
+        return false;
+    }
+
+    public override float retrieveMoveInput()
+    {
+        return 1f;
+    }
+
+    public override bool retrieveColourWhite()
+    {
+        return false;
+    }
+
+    public override bool retrieveColourRed()
+    {
+        return false;
+    }
+
+    public override bool retrieveColourGreen()
+    {
+        return false;
+    }
+
+    public override bool retrieveColourYellow()
+    {
+        return false;
+    }
+
+    public override bool retrieveColourBlue()
+    {
+        return false;
+    }
+
+    public override bool retrieveColourMagenta()
+    {
+        return false;
+    }
+}
