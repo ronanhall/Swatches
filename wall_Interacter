@@ -1,0 +1,106 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class wall_Interacter : MonoBehaviour
+{
+    [SerializeField] private input_Controller input = null;
+    public bool wallJumping { get; private set; }
+
+    [Header("Wall Slide")]
+    [SerializeField][Range(0.1f, 5f)] private float _wallSlideMaxSpeed = 2f;
+
+    [Header("Wall Jump")]
+    [SerializeField] private Vector2 _wallJumpClimb = new Vector2(4f, 12f);
+    [SerializeField] private Vector2 _wallJumpBounce = new Vector2(10.7f, 10f);
+    [SerializeField] private Vector2 _wallJumpLeap = new Vector2(14f, 12f);
+
+    private collision_Data_Retriever _collisionDataRetreiver;
+    private Rigidbody2D _rb;
+
+    private Vector2 _velocity;
+    private bool _onWall;
+    private bool _onGround;
+    private bool _desiredJump;
+
+    private float _wallDirectionX;
+
+    public bool canWallJump;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        _collisionDataRetreiver = GetComponent<collision_Data_Retriever>();
+        _rb = GetComponent<Rigidbody2D>();
+        canWallJump = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(_onWall && !_onGround && canWallJump)
+        {
+            _desiredJump |= input.retrieveJumpInput();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        _velocity = _rb.velocity;
+        _onWall = _collisionDataRetreiver.onWall;
+        _onGround = _collisionDataRetreiver.onGround;
+        _wallDirectionX = _collisionDataRetreiver.contactNormal.x;
+
+        #region Wall Slide
+        if (_onWall)
+        {
+            if(_velocity.y < -_wallSlideMaxSpeed)
+            {
+                _velocity.y = -_wallSlideMaxSpeed;
+            }
+        }
+        #endregion
+
+        #region Wall Jump
+        
+        if ((_onWall && _velocity.x == 0) || _onGround)
+        {
+            wallJumping = false;
+        }
+        
+        if (_desiredJump)
+        {
+            if (-_wallDirectionX == input.retrieveMoveInput())
+            {
+                _velocity = new Vector2(_wallJumpClimb.x * _wallDirectionX, _wallJumpClimb.y);
+                wallJumping = true;
+                _desiredJump = false;
+            }
+            else if (input.retrieveMoveInput() == 0)
+            {
+                _velocity = new Vector2(_wallJumpBounce.x * _wallDirectionX, _wallJumpBounce.y);
+                wallJumping = true;
+                _desiredJump = false;
+            }
+            else
+            {
+                _velocity = new Vector2(_wallJumpLeap.x * _wallDirectionX, _wallJumpLeap.y);
+                wallJumping = true;
+                _desiredJump = false;
+            }
+        }
+        #endregion
+
+        _rb.velocity = _velocity;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        _collisionDataRetreiver.EvaluateCollision(collision);
+
+        if (_collisionDataRetreiver.onWall && !_collisionDataRetreiver.onGround && wallJumping)
+        {
+            _rb.velocity = Vector2.zero;
+        }
+    }
+}
